@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 /**
  * 普利姆算法
+ * 找到0到邻接点的最短距离，并将其记录到数组中，并将该点标记为已访问。
+ * 然后以该邻接点为起点，找到所有未被访问的邻接点，并将距离记录到数组中。
+ * 找到数组中最小的值，该点就是访问的最短距离，然后再以该节点出发，进行寻找。
  */
 public class GraphPrim {
     private static final int MAX = 999;

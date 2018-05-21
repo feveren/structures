@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * 克鲁斯卡算法
+ * 以边进行计算，首先将所有的边以距离进行从小到大排序。
+ * 然后将边依次放入到数组中，并计算是否有回环，有的话舍弃，没有的话就保留，知道遍历完。
  */
 public class GraphKruskal {
     private static final int MAX = 999;
