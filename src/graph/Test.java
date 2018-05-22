@@ -8,7 +8,8 @@ public class Test {
 //        boardFirstSearch(getGraph2());
 //        testGraphPrim(getGraphPrim());
 //        testGraphKruskal(getGraphKruskal());
-        testGraphDijkstra(getGraphDijkstra());
+//        testGraphDijkstra(getGraphDijkstra());
+        testGraphTopological(getGraphTopological());
     }
 
     private static void testOutDegree(Graph graph) {
@@ -54,6 +55,11 @@ public class Test {
     private static void testGraphDijkstra(GraphDijkstra graph) {
         System.out.println(graph);
         graph.shortest();
+    }
+
+    private static void testGraphTopological(GraphTopological graph) {
+        System.out.println(graph);
+        graph.sort();
     }
 
     private static Graph getGraph1() {
@@ -147,4 +153,45 @@ public class Test {
         graph.add(7, 8, 4);
         return graph;
     }
+
+    private static GraphTopological getGraphTopological() {
+        GraphTopological.Vertex[] vertices = new GraphTopological.Vertex[14];
+        for (int i = 0; i < 14; i++) {
+            vertices[i] = new GraphTopological.Vertex("v" + i);
+        }
+        vertices[0].firstEdge = createEdges(vertices, new int[] {11, 4, 5});
+        vertices[1].firstEdge = createEdges(vertices, new int[] {4, 8, 2});
+        vertices[2].firstEdge = createEdges(vertices, new int[] {5, 6, 9});
+        vertices[2].in = 2;
+        vertices[3].firstEdge = createEdges(vertices, new int[] {2, 13});
+        vertices[4].firstEdge = createEdges(vertices, new int[] {7});
+        vertices[4].in = 2;
+        vertices[5].firstEdge = createEdges(vertices, new int[] {8, 12});
+        vertices[5].in = 3;
+        vertices[6].firstEdge = createEdges(vertices, new int[] {5});
+        vertices[6].in = 1;
+        vertices[7].in = 2;
+        vertices[8].firstEdge = createEdges(vertices, new int[] {7});
+        vertices[8].in = 2;
+        vertices[9].firstEdge = createEdges(vertices, new int[] {11, 10});
+        vertices[9].in = 2;
+        vertices[10].firstEdge = createEdges(vertices, new int[] {13});
+        vertices[10].in = 1;
+        vertices[11].in = 2;
+        vertices[12].firstEdge = createEdges(vertices, new int[] {9});
+        vertices[12].in = 1;
+        vertices[13].in = 2;
+        return new GraphTopological(vertices);
+    }
+
+    private static GraphTopological.Edge createEdges(GraphTopological.Vertex[] vertices, int[] array) {
+        GraphTopological.Edge first = new GraphTopological.Edge(vertices[array[0]]);
+        GraphTopological.Edge edge = first;
+        for (int i = 1; i < array.length; i++) {
+            edge.next = new GraphTopological.Edge(vertices[array[i]]);
+            edge = edge.next;
+        }
+        return first;
+    }
 }
+
